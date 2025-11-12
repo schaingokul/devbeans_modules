@@ -4,10 +4,11 @@ import cors from 'cors';
 import { initDatabase } from './core/dbInitializer';
 import { errorHandler } from './middleware/errorMiddleware';
 import http from 'http';
-import inistalizeSocket from './socket'
+import inistalizeSocket from './socket';
+import appConfig from './config/app.config';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+
 app.use(cors({origin:"*"}));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
@@ -36,10 +37,10 @@ const startServer = async () => {
 
     console.log('✅ Database connected successfully');
 
-    server.listen(PORT, async() => {
+    server.listen(appConfig.PORT, async() => {
       // await initDatabase();
       // await testSession();
-      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`🚀 Server running on port ${appConfig.PORT}`);
     });
 
     // Graceful shutdown
