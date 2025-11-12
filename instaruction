@@ -1,0 +1,4 @@
+# Both single and cluster Redis support -> Pub/Sub features -> Automatic reconnection -> used in NestJS, BullMQ
+
+npm install ioredis
+npm install -D @types/ioredis
