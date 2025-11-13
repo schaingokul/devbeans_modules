@@ -1,6 +1,7 @@
 import pg from "pg";
 import dotenv from 'dotenv';
 import path from 'path';
+import appConfig from "../app.config";
 
 dotenv.config({ path: path.resolve(__dirname, ".env") });
 
@@ -15,11 +16,14 @@ class Database {
   private constructor() {
     // Choose connection method dynamically
       this.pool = new Pool({
-        user: String(process.env.DB_USER),
-        host: String(process.env.DB_HOST),
-        database: String(process.env.DB_NAME),
-        password: String(process.env.DB_PASSWORD),
-        port: Number(process.env.DB_PORT),
+        user: appConfig.db.user,
+        host: appConfig.db.host,
+        database: appConfig.db.database,
+        password: appConfig.db.password,
+        port: appConfig.db.port,
+        max: appConfig.db.maxConnections || 10,
+        idleTimeoutMillis: Number(appConfig.db.idleTimeoutMillis) || 30000,
+        connectionTimeoutMillis: Number(appConfig.db.connectionTimeoutMillis) || 2000,
       });
       console.log("✅ Connecting... to local PostgreSQL");
   }

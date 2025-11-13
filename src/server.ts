@@ -33,12 +33,12 @@ app.use(errorHandler)
 const startServer = async () => {
   try {
     // Test DB connection before starting
-    // await pool.query('SELECT NOW()');
+    await pool.query('SELECT NOW()');
 
     console.log('✅ Database connected successfully');
 
     server.listen(appConfig.PORT, async() => {
-      // await initDatabase();
+      await initDatabase();
       // await testSession();
       console.log(`🚀 Server running on port ${appConfig.PORT}`);
     });

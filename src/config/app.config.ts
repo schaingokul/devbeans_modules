@@ -13,6 +13,9 @@ interface DBConfig {
   user: string;
   password: string;
   database: string;
+  maxConnections: number;
+  idleTimeoutMillis: number;
+  connectionTimeoutMillis: string | number;
 }
 
 interface RedisConfig {
@@ -34,16 +37,19 @@ class AppConfig {
 
     // PostgreSQL
     this.db = {
-      host: this.get("DB_HOST"),
+      host: this.get("DB_HOST", 'localhost'),
       port: Number(this.get("DB_PORT", 5432)),
-      user: this.get("DB_USER"),
-      password: this.get("DB_PASSWORD"),
-      database: this.get("DB_NAME"),
+      user: this.get("DB_USER", 'postgres'),
+      password: this.get("DB_PASSWORD", '1234'),
+      database: this.get("DB_NAME", 'gold'),
+      maxConnections: Number(this.get("DB_MAX_CONNECTIONS", 10) ),
+      idleTimeoutMillis: Number(this.get("DB_IDLETIMEOUTMILLIS", 30000)),
+      connectionTimeoutMillis: this.get("DB_CONNECTIONTIMEOUTMILLIS",2000),
     };
 
     // Redis
     this.redis = {
-      host: this.get("REDIS_HOST"),
+      host: this.get("REDIS_HOST", 'localhost'),
       port: Number(this.get("REDIS_PORT", 6379)),
       password: this.get("REDIS_PASSWORD", ""),
     };
