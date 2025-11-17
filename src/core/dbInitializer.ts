@@ -1,6 +1,7 @@
 import fs from "fs";
 import path from "path";
 import TableFactory from "../core/factory/dynamicModelFactory";
+import appConfig from "../config/app.config";
 
 
 // const modules = ["users"];
@@ -38,20 +39,20 @@ export const initDatabase = async () => {
       }
     }
 
-    console.log("\n🧩 DATABASE INITIALIZATION SUMMARY ------------------");
-    console.log("✅ Success:");
-    successLogs.forEach((msg) => console.log("   ", msg));
+    appConfig.logger.log("\n🧩 DATABASE INITIALIZATION SUMMARY ------------------");
+    appConfig.logger.log("✅ Success:");
+    successLogs.forEach((msg) => appConfig.logger.log("   ", msg));
 
     if (failureLogs.length > 0) {
-      console.log("\n❌ Failed:");
-      failureLogs.forEach((msg) => console.log("   ", msg));
+      appConfig.logger.log("\n❌ Failed:");
+      failureLogs.forEach((msg) => appConfig.logger.log("   ", msg));
     } else {
-      console.log("\n✨ All tables initialized successfully with no errors!");
+      appConfig.logger.log("\n✨ All tables initialized successfully with no errors!");
     }
 
-    console.log("---------------------------------------------------\n");
+    appConfig.logger.log("---------------------------------------------------\n");
   } catch (err) {
-    console.error("❌ Database initialization failed:", err);
+    appConfig.logger.error("❌ Database initialization failed:", err);
     process.exit(1); // stop server if db init fails
   }
 };

@@ -6,7 +6,7 @@ export const registerUser = async(req:Request, res:Response, next:NextFunction):
   const client = await pool.connect()
   try {
     client.query('BEGIN');
-    const result = await userService.registerServices(req.body, client)
+    // const result = await userService.registerServices(req.body, client)
     client.query('COMMIT')
   } catch (error) {
     client.query('ROLLBACK');

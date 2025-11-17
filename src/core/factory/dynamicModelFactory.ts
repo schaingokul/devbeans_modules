@@ -1,4 +1,5 @@
 import { pool } from "../../config/db";
+import appConfig from "../../config/app.config";
 
 const tableCache: { [key: string]: boolean | string | number | null | undefined } = {};
 
@@ -11,7 +12,7 @@ const tableCache: { [key: string]: boolean | string | number | null | undefined 
 class TableFactory {
   static async newTable(tableName: string, sql: any): Promise<void | string> {
     if (tableCache[tableName]) {
-      console.log(`⚡ Reusing existing table: ${tableName}`);
+      appConfig.logger.log(`⚡ Reusing existing table: ${tableName}`);
       return tableName;
     }
 
@@ -25,7 +26,7 @@ class TableFactory {
     }
 
     tableCache[tableName] = true;
-    console.log(`✅ Created tables for module: ${tableName}`);
+    appConfig.logger.log(`✅ Created tables for module: ${tableName}`);
   }
 }
 

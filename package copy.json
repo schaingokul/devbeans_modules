@@ -2,14 +2,12 @@
   "name": "node",
   "version": "1.0.0",
   "description": "",
-  "main": "bundle/index.js",
+  "main": "index.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/server.js",
     "dev": "nodemon --watch src --exec ts-node src/server.ts",
-    "build": "tsc",
-    "bundle": "ncc build dist/server.js -o bundle",
-    "obfuscate": "javascript-obfuscator bundle --output bundle --compact true --control-flow-flattening true",
-    "release": "npm run build && npm run bundle && npm run obfuscate",
-    "start": "node bundle/index.js"
+    "build": "tsc && cpx .env dist/config/db/"
   },
   "keywords": [],
   "author": "",

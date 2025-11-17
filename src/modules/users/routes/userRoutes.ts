@@ -12,6 +12,6 @@ router.put('/:id', authMiddleware, authorizeRoles('users', 'admin'), userControl
 router.get('/' , authMiddleware, authorizeRoles('admin'), userController.listUsers);
 router.put('/:id', authMiddleware, authorizeRoles('users', 'admin'), userController.softDeleteUserById);
 router.delete('/:id', authMiddleware, authorizeRoles('admin'), userController.hardDeleteUserById);
-router.post('/logout');
+// router.post('/logout');
 
 export default router;

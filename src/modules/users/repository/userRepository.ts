@@ -50,7 +50,7 @@ export const hardDeleteUser = async (id: string, client: PoolClient) => {
 export const softDeleteUser = async (id: string, client: PoolClient) => {
   const db = client || pool;
   const result = await db.query(
-    `UPDATE users SET is = 'deactive', updated_at = NOW() WHERE user_id = $1 RETURNING *`,
+    `UPDATE users SET isactive = 'false', updated_at = NOW() WHERE user_id = $1 RETURNING *`,
     [id]
   );
   return result.rows[0];

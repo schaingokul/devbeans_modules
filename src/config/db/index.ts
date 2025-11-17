@@ -25,7 +25,7 @@ class Database {
         idleTimeoutMillis: Number(appConfig.db.idleTimeoutMillis) || 30000,
         connectionTimeoutMillis: Number(appConfig.db.connectionTimeoutMillis) || 2000,
       });
-      console.log("✅ Connecting... to local PostgreSQL");
+       appConfig.logger.log("✅ Connecting... to local PostgreSQL");
   }
 
   public static getInstance():Database {

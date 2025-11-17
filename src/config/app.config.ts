@@ -41,7 +41,7 @@ class AppConfig {
       port: Number(this.get("DB_PORT", 5432)),
       user: this.get("DB_USER", 'postgres'),
       password: this.get("DB_PASSWORD", '1234'),
-      database: this.get("DB_NAME", 'gold'),
+      database: this.get("DB_NAME", 'modules'),
       maxConnections: Number(this.get("DB_MAX_CONNECTIONS", 10) ),
       idleTimeoutMillis: Number(this.get("DB_IDLETIMEOUTMILLIS", 30000)),
       connectionTimeoutMillis: this.get("DB_CONNECTIONTIMEOUTMILLIS",2000),
@@ -54,7 +54,25 @@ class AppConfig {
       password: this.get("REDIS_PASSWORD", ""),
     };
   }
+  
+    logger = {
+    log: (...args: any[]) => {
+      if (this.get("LOG_ENABLE", "true") === "true") {
+        console.log(...args);
+      }
+    },
 
+    warn: (...args: any[]) => {
+      if (this.get("LOG_ENABLE", "true") === "true") {
+        console.warn(...args);
+      }
+    },
+
+    error: (...args: any[]) => {
+      // errors should ALWAYS print (even if LOG_ENABLE=false)
+      console.error(...args);
+    }
+  };
   /**
    * Safely fetch env variables
    */
